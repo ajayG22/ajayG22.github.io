@@ -10,6 +10,35 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
     <body>
+		
+		<div id="amazon-root"></div>
+		<script type="text/javascript">
+
+			window.onAmazonLoginReady = function() {
+			  amazon.Login.setClientId('amzn1.application-oa2-client.e44e498d5f324dc984810baff04386d8');
+			};
+			(function(d) {
+			  var a = d.createElement('script'); a.type = 'text/javascript';
+			  a.async = true; a.id = 'amazon-login-sdk';
+			  a.src = 'https://assets.loginwithamazon.com/sdk/na/login1.js';
+			  d.getElementById('amazon-root').appendChild(a);
+			})(document);
+			
+			document.getElementById('LoginWithAmazon').onclick = function() {
+				options = {}
+				options.scope = 'profile';
+				options.scope_data = {
+					'profile' : {'essential': false} 
+				};
+				amazon.Login.authorize(options,
+					'https://ajayg22.github.io/handle_login.php');
+				return false;
+			};
+
+		</script>
+		
+		
+		
         <div class="conainer-fluid bg">
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-12"></div>
@@ -30,11 +59,20 @@
                           <label class="form-check-label" for="exampleCheck1">Remember me</label>
                         </div>
                         <button type="submit" class="btn btn-info btn-block">Submit</button>
+						<center>or</center>
+						<center>
+						<a href id="LoginWithAmazon" >
+						<img border="0" alt="Login with Amazon"
+						src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
+						width="156" height="32" />
+						</a>
+						</center>
                       </form>
                     <!-- form end -->
               	</div>
                 <div class="col-md-4 col-sm-4 col-xs-12"></div>
         	</div>
         </div>
+		
     </body>
 </html>
