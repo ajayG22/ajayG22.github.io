@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Add Transaction</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link href="css/global.css" type="text/css" rel="stylesheet">
+        
+        
+	    <script>
+			function addTransaction() {
+				
+				document.getElementById("status").innerHTML="";
+				var organisation = document.getElementById("organisation").value;
+				var empName = document.getElementById("empName").value;
+				var bankName = document.getElementById("bankName").value;
+				var accNumber = document.getElementById("accNumber").value;
+				var ifscCode = document.getElementById("ifscCode").value;
+				var amount = document.getElementById("amount").value;
+
+			  if (window.XMLHttpRequest) {
+			    // code for IE7+, Firefox, Chrome, Opera, Safari
+			    xmlhttp=new XMLHttpRequest();
+			  } else { // code for IE6, IE5
+			    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			  xmlhttp.onreadystatechange=function() {
+			    if (this.readyState==4 && this.status==200) {
+			      document.getElementById("status").innerHTML=this.responseText;
+			    }
+			  }
+			  xmlhttp.open("POST","/transaction/addRecord.jsp?organisation="+organisation+"&empName="+empName+"&bankName="+bankName+"&accNumber="+accNumber+"&ifscCode="+ifscCode+"&amount="+amount,true);
+			  xmlhttp.send();
+			}
+		</script>
+    </head>
+    <body>
+        <div class="conainer-fluid bg">
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+	                    <!-- form start -->
+	                    <form class="form-container form-group" action="" method="post">
+	                        <h1>Transaction Details</h1>
+	                        <div class="row">
+		                        <div class="col-md-4">
+		                          <label for="organisation">Organisation</label>
+		                          <input type="text" class="form-control" name="organisation" id="organisation" placeholder="Organisation Name">
+		                         </div>
+		                         <div class="col-md-4"> 
+		                          <label for="empName">Employee Name</label>
+		                          <input type="text" class="form-control" name="ename" id="empName" placeholder="Employee Name">
+		                        </div>
+		                        <div class="col-md-4"> 
+		                          <label for="bankName">Bank Name</label>
+		                          <input type="text" class="form-control" name="lname" id="bankName" placeholder="Bank Name">
+		                        </div>
+	                        </div>
+	                        <div class="row">
+		                        <div class="col-md-4">
+		                          <label for=""accNumber"">Account Number</label>
+		                          <input type="text" class="form-control" name="mnumber" id="accNumber" placeholder="Account Number">
+		                         </div>
+		                         <div class="col-md-4"> 
+		                          <label for="ifscCode">IFSC Code</label>
+		                          <input type="text" class="form-control" name="email" id="ifscCode" placeholder="IFSC Code">
+		                        </div>
+		                        <div class="col-md-4"> 
+		                          <label for=""amount"">Amount</label>
+		                          <input type="text" class="form-control" name="email" id="amount" placeholder="Amount">
+		                        </div>
+	                        </div>
+	                        <br>
+	                        <button type="button" onclick="addTransaction()" class="btn btn-info" >Add Record</button>
+	                        <p id="status"></p>
+                      	</form>
+                    <!-- form end -->
+              	</div>
+                <div class="col-md-4 col-sm-4 col-xs-12"></div>
+        	</div>
+        </div>
+    </body>
+</html>
